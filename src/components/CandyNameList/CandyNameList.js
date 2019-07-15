@@ -8,6 +8,11 @@ export default class CandyNameList extends Component {
                     this.props.candyNames.map( candyName =>
                         <div key={candyName.id}>
                         {candyName.name}
+                        <br></br>of type<br></br>
+                            {
+                            this.props.candyTypes.find( candyType => candyType.id === candyName.candyTypeId
+                                ).name
+                            }
                         </div>
                     )
                 }
