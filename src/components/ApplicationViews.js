@@ -27,10 +27,10 @@ export default class ApplicationViews extends Component {
     ]
 
     candyNameArray = [
-        { id: 1, name: "Gummy Bears" },
-        { id: 2, name: "Peanut M&M's" },
-        { id: 3, name:"Blow Pop" },
-        { id: 4, name: "Peeps" }
+        { id: 1, name: "Gummy Bears", candyTypeId: 1 },
+        { id: 2, name: "Peanut M&M's", candyTypeId: 2 },
+        { id: 3, name:"Blow Pop", candyTypeId: 3},
+        { id: 4, name: "Peeps", candyTypeId: 4 }
     ]
 
     state= {
@@ -50,7 +50,9 @@ export default class ApplicationViews extends Component {
                     return <EmployeeList employees={this.state.employees} />
                 }} />
                 <Route path="/candyNames" render={(props) => {
-                    return <CandyNameList candyNames={this.state.candyNames} />
+                    return <CandyNameList
+                    candyNames={this.state.candyNames}
+                    candyTypes={this.state.candyTypes} />
                 }} />
             </React.Fragment>
         )
