@@ -13,6 +13,9 @@ export default class CandyNameList extends Component {
                             this.props.candyTypes.find( candyType => candyType.id === candyName.candyTypeId
                                 ).name
                             }
+                            <button
+                                    onClick={() => this.props.deleteCandy(candyName.id)}
+                                    className="card-link">Delete</button>
                         </div>
                     )
                 }
