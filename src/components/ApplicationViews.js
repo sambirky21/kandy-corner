@@ -3,9 +3,11 @@ import React, { Component } from 'react'
 import StoreList from './StoreList/StoreList'
 import EmployeeList from './EmployeeList/EmployeeList'
 import CandyNameList from './CandyNameList/CandyNameList'
+import CandyNameDetail from './CandyNameList/CandyNameDetail'
+import { withRouter } from 'react-router'
 import apiManager from '../apiManager'
 
-export default class ApplicationViews extends Component {
+class ApplicationViews extends Component {
 
 
     state= {
@@ -24,39 +26,16 @@ export default class ApplicationViews extends Component {
         .then(() => this.setState(newState))
     }
 
-        // fetch("http://localhost:5002/stores")
-        //     .then(r => r.json())
-        //     .then(stores => newState.stores = stores)
-        //     .then(() => fetch("http://localhost:5002/employees")
-        //     .then(r => r.json()))
-        //     .then(employees => newState.employees = employees)
-        //     .then(() => fetch("http://localhost:5002/candyNames")
-        //     .then(r => r.json()))
-        //     .then(candyNames => newState.candyNames = candyNames)
-        //     .then(() => fetch("http://localhost:5002/candyTypes")
-        //     .then(r => r.json()))
-        //     .then(candyTypes => newState.candyTypes = candyTypes)
-        //     .then(() => this.setState(newState))
-
-    // deleteCandy = id => {
-    //     fetch(`http://localhost:5002/candyNames/${id}`, {
-    //         method: "DELETE"})
-    //         .then(r => r.json())
-    //         .then(() => fetch("http://localhost:5002/candyNames"))
-    //         .then(r => r.json())
-    //         .then(candyNames => this.setState({
-    //             candyNames: candyNames
-    //         })
-    //     )
-    // }
-
     deleteCandy = id => {
         return apiManager.deleteAndList("candyNames", id)
-            .then(candyNames => this.setState({
+            .then(candyNames => {
+                this.props.history.push("/candyNames")
+                this.setState({
             candyNames: candyNames
             })
-        )
-    }
+            }
+    )
+}
 
     render() {
         return (
@@ -67,13 +46,25 @@ export default class ApplicationViews extends Component {
                 <Route path="/employees" render={(props) => {
                     return <EmployeeList employees={this.state.employees} />
                 }} />
-                <Route path="/candyNames" render={(props) => {
+                <Route exact path="/candyNames" render={(props) => {
                     return <CandyNameList
                     deleteCandy={this.deleteCandy}
                     candyNames={this.state.candyNames}
                     candyTypes={this.state.candyTypes} />
                 }} />
+                <Route path="/candyNames/:candyNameId(\d+)" render = {(props) => {
+                    let candyName = this.state.candyNames.find( candyName =>
+                        candyName.id === parseInt(props.match.params.candyNameId)
+                        )
+                    if (!candyName) {
+                        candyName = {id:404, name:"404", breed: "Candy not found"}
+                    }
+                    return <CandyNameDetail candyName = { candyName }
+                                            deleteCandy = { this.deleteCandy } />
+                }} />
             </React.Fragment>
         )
     }
 }
+
+export default withRouter(ApplicationViews)
