@@ -1,29 +1,73 @@
 {
   "stores": [
-    { "id": 1, "name": "Stacy's Candy" },
-    { "id": 2, "name": "Sam's Candy" },
-    { "id": 3, "name": "Podge's Candy" },
-    { "id": 4, "name": "Addie's Candy" }
+    {
+      "id": 1,
+      "name": "Stacy's Candy"
+    },
+    {
+      "id": 2,
+      "name": "Sam's Candy"
+    },
+    {
+      "id": 3,
+      "name": "Podge's Candy"
+    },
+    {
+      "id": 4,
+      "name": "Addie's Candy"
+    }
   ],
-
   "employees": [
-    { "id": 1, "name": "Brian" },
-    { "id": 2, "name": "Brock" },
-    { "id": 3, "name": "Kayla" },
-    { "id": 4, "name": "Rocko" }
+    {
+      "id": 1,
+      "name": "Brian"
+    },
+    {
+      "id": 2,
+      "name": "Brock"
+    },
+    {
+      "id": 3,
+      "name": "Kayla"
+    },
+    {
+      "id": 4,
+      "name": "Rocko"
+    }
   ],
-
   "candyTypes": [
-    { "id": 1, "name": "Chewy" },
-    { "id": 2, "name": "Chocolate" },
-    { "id": 3, "name": "Hard" },
-    { "id": 4, "name": "Holiday" }
+    {
+      "id": 1,
+      "name": "Chewy"
+    },
+    {
+      "id": 2,
+      "name": "Chocolate"
+    },
+    {
+      "id": 3,
+      "name": "Hard"
+    },
+    {
+      "id": 4,
+      "name": "Holiday"
+    }
   ],
-
   "candyNames": [
-    { "id": 1, "name": "Gummy Bears", "candyTypeId": 1 },
-    { "id": 2, "name": "Peanut M&M's", "candyTypeId": 2 },
-    { "id": 3, "name": "Blow Pop", "candyTypeId": 3 },
-    { "id": 4, "name": "Peeps", "candyTypeId": 4 }
+    {
+      "id": 1,
+      "name": "Gummy Bears",
+      "candyTypeId": 1
+    },
+    {
+      "id": 2,
+      "name": "Peanut M&M's",
+      "candyTypeId": 2
+    },
+    {
+      "id": 3,
+      "name": "Blow Pop",
+      "candyTypeId": 3
+    }
   ]
 }
