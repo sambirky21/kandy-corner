@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import StoreList from './StoreList/StoreList'
 import EmployeeList from './EmployeeList/EmployeeList'
 import CandyNameList from './CandyNameList/CandyNameList'
+import apiManager from '../apiManager'
 
 export default class ApplicationViews extends Component {
 
@@ -16,30 +17,43 @@ export default class ApplicationViews extends Component {
 
     componentDidMount() {
         const newState = {}
-
-        fetch("http://localhost:5002/stores")
-            .then(r => r.json())
-            .then(stores => newState.stores = stores)
-            .then(() => fetch("http://localhost:5002/employees")
-            .then(r => r.json()))
-            .then(employees => newState.employees = employees)
-            .then(() => fetch("http://localhost:5002/candyNames")
-            .then(r => r.json()))
-            .then(candyNames => newState.candyNames = candyNames)
-            .then(() => fetch("http://localhost:5002/candyTypes")
-            .then(r => r.json()))
-            .then(candyTypes => newState.candyTypes = candyTypes)
-            .then(() => this.setState(newState))
+        apiManager.getAll("stores").then(stores => newState.stores = stores)
+        apiManager.getAll("employees").then(employees => newState.employees = employees)
+        apiManager.getAll("candyNames").then(candyNames => newState.candyNames = candyNames)
+        apiManager.getAll("candyTypes").then(candyTypes => newState.candyTypes = candyTypes)
+        .then(() => this.setState(newState))
     }
 
+        // fetch("http://localhost:5002/stores")
+        //     .then(r => r.json())
+        //     .then(stores => newState.stores = stores)
+        //     .then(() => fetch("http://localhost:5002/employees")
+        //     .then(r => r.json()))
+        //     .then(employees => newState.employees = employees)
+        //     .then(() => fetch("http://localhost:5002/candyNames")
+        //     .then(r => r.json()))
+        //     .then(candyNames => newState.candyNames = candyNames)
+        //     .then(() => fetch("http://localhost:5002/candyTypes")
+        //     .then(r => r.json()))
+        //     .then(candyTypes => newState.candyTypes = candyTypes)
+        //     .then(() => this.setState(newState))
+
+    // deleteCandy = id => {
+    //     fetch(`http://localhost:5002/candyNames/${id}`, {
+    //         method: "DELETE"})
+    //         .then(r => r.json())
+    //         .then(() => fetch("http://localhost:5002/candyNames"))
+    //         .then(r => r.json())
+    //         .then(candyNames => this.setState({
+    //             candyNames: candyNames
+    //         })
+    //     )
+    // }
+
     deleteCandy = id => {
-        fetch(`http://localhost:5002/candyNames/${id}`, {
-            method: "DELETE"})
-            .then(r => r.json())
-            .then(() => fetch("http://localhost:5002/candyNames"))
-            .then(r => r.json())
+        return apiManager.deleteAndList("candyNames", id)
             .then(candyNames => this.setState({
-                candyNames: candyNames
+            candyNames: candyNames
             })
         )
     }
